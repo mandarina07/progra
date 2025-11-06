@@ -1,18 +1,16 @@
 package com.example.proyecto.dominio
 
 /*
-*Cliente CGE
+* Operador del sistema
 * */
 
-class Cliente(
+class Operador(
     id: String,
     createdAt: String = "",
     updatedAt: String = "",
     rut: String,
     nombre: String,
     email: String,
-    var direccionFacturacion: String,
-    var estado: EstadoCliente = EstadoCliente.ACTIVO
-
+    var perfil: String
 ) : Persona(id, createdAt, updatedAt, rut, nombre, email) {
 }
