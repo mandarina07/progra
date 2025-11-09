@@ -1,9 +1,17 @@
 package com.example.proyecto.dominio
 
-/*
-* Boleta mensual
-* */
 
+/**
+ * Boleta
+ *
+ * @property idCliente
+ * @property anio
+ * @property mes
+ * @property kwhTotal
+ * @property detalle
+ * @property estado
+ * @constructor Create empty Boleta
+ */
 class Boleta (
     val idCliente: String,
     val anio: Int,
@@ -11,6 +19,4 @@ class Boleta (
     val kwhTotal: Double,
     val detalle: TarifaDetalle,
     var estado: EstadoBoleta = EstadoBoleta.EMITIDA
-){
-
-}
+)

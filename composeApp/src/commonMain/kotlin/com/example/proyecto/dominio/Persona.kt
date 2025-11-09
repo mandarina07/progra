@@ -1,9 +1,17 @@
 package com.example.proyecto.dominio
 
-/*
-* Persona (cliente/operador)
-* */
-
+/**
+ * Persona
+ *
+ * @property rut
+ * @property nombre
+ * @property email
+ * @constructor
+ *
+ * @param id
+ * @param createdAt
+ * @param updatedAt
+ */
 open class Persona(
     id: String,
     createdAt: String = "",
@@ -11,6 +19,4 @@ open class Persona(
     val rut: String,
     var nombre: String,
     var email: String,
-) : EntidadBase(id, createdAt, updatedAt) {
-
-}
+) : EntidadBase(id, createdAt, updatedAt)

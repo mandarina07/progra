@@ -2,6 +2,12 @@ package com.example.proyecto.persistencia
 
 import com.example.proyecto.dominio.Cliente
 
+/**
+ * Cliente repositorio impl
+ *
+ * @property persistenciaDatos
+ * @constructor Create empty Cliente repositorio impl
+ */
 class ClienteRepositorioImpl(
     private val persistenciaDatos: PersistenciaDatos
 ) : ClienteRepositorio {

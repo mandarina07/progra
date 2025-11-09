@@ -1,9 +1,18 @@
 package com.example.proyecto.dominio
 
-/*
-* Operador del sistema
-* */
-
+/**
+ * Operador
+ *
+ * @property perfil
+ * @constructor
+ *
+ * @param id
+ * @param createdAt
+ * @param updatedAt
+ * @param rut
+ * @param nombre
+ * @param email
+ */
 class Operador(
     id: String,
     createdAt: String = "",
@@ -12,5 +21,4 @@ class Operador(
     nombre: String,
     email: String,
     var perfil: String
-) : Persona(id, createdAt, updatedAt, rut, nombre, email) {
-}
+) : Persona(id, createdAt, updatedAt, rut, nombre, email)

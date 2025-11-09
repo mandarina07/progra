@@ -1,9 +1,19 @@
 package com.example.proyecto.dominio
 
-/*
-* Medidor Trifasico
-* */
-
+/**
+ * Medidor trifasico
+ *
+ * @property potenciaMaxKw
+ * @property factorPotencia
+ * @constructor
+ *
+ * @param id
+ * @param createdAt
+ * @param updatedAt
+ * @param codigo
+ * @param direccionSuministro
+ * @param activo
+ */
 class MedidorTrifasico (
     id: String,
     createdAt: String = "",

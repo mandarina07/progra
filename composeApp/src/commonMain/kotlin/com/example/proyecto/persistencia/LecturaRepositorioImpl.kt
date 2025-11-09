@@ -2,6 +2,12 @@ package com.example.proyecto.persistencia
 
 import com.example.proyecto.dominio.LecturaConsumo
 
+/**
+ * Lectura repositorio impl
+ *
+ * @property persistenciaDatos
+ * @constructor Create empty Lectura repositorio impl
+ */
 class LecturaRepositorioImpl(
 private val persistenciaDatos: PersistenciaDatos
 ) : LecturaRepositorio {

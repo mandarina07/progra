@@ -2,6 +2,12 @@ package com.example.proyecto.persistencia
 
 import com.example.proyecto.dominio.Boleta
 
+/**
+ * Boleta repositorio impl
+ *
+ * @property persistenciaDatos
+ * @constructor Create empty Boleta repositorio impl
+ */
 class BoletaRepositorioImpl(
     private val persistenciaDatos: PersistenciaDatos
 ) : BoletaRepositorio {

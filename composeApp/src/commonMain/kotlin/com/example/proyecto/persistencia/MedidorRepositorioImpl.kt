@@ -2,6 +2,12 @@ package com.example.proyecto.persistencia
 
 import com.example.proyecto.dominio.Medidor
 
+/**
+ * Medidor repositorio impl
+ *
+ * @property persistenciaDatos
+ * @constructor Create empty Medidor repositorio impl
+ */
 class MedidorRepositorioImpl(
     private val persistenciaDatos: PersistenciaDatos
 ) : MedidorRepositorio {

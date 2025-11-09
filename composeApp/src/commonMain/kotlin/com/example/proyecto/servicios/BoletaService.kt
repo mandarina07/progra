@@ -8,15 +8,15 @@ import com.example.proyecto.persistencia.LecturaRepositorio
 import com.example.proyecto.persistencia.MedidorRepositorio
 
 /**
- * Servicio de lógica de negocio para emitir boletas.
- * REVISAR
- */
-/*
-* Aquí asumimos que en tu clase Cliente existe una propiedad rut (
-* que es lo típico y calza con el PDF).
-*En Boleta, usamos idCliente = cliente.rut, como ya veníamos haciendo.
-* */
-
+ * Boleta service
+ *
+ * @property clienteRepositorio
+ * @property medidorRepositorio
+ * @property lecturaRepositorio
+ * @property boletaRepositorio
+ * @property tarifaService
+ * @constructor Create empty Boleta service
+ */// Servicio encargado de generar y administrar las boletas
 class BoletaService(
     private val clienteRepositorio: ClienteRepositorio,
     private val medidorRepositorio: MedidorRepositorio,
@@ -26,40 +26,26 @@ class BoletaService(
 ) {
 
     /**
-     * Calcula el total de kWh consumidos por TODOS los medidores
-     * de un cliente en un mes/año determinado.
-     */
-    fun calcularKwhTotalCliente(rutCliente: String, anio: Int, mes: Int): Double {
-        // Buscar todos los medidores asociados al cliente
-        val medidores = medidorRepositorio.obtenerPorRut(rutCliente)
-
-        // Para cada medidor, sumar el consumo del mes
-        return medidores.sumOf { medidor ->
-            val lecturas = lecturaRepositorio.listaPorMedidorMes(medidor.codigo, anio, mes)
-            lecturas.sumOf { it.kwhLeidos }
-        }
-    }
-
-    /**
-     * Emite la boleta mensual para un cliente, considerando todos sus medidores.
-     */
+     * Emitir boleta mensual
+     *
+     * @param rutCliente
+     * @param anio
+     * @param mes
+     * @param tipoTarifa
+     * @return
+     */// Genera una boleta mensual para el cliente y la guarda en el repositorio
     fun emitirBoletaMensual(
         rutCliente: String,
         anio: Int,
         mes: Int,
         tipoTarifa: String
     ): Boleta {
-        // Verificar que el cliente exista
         val cliente = clienteRepositorio.obtenerPorRut(rutCliente)
             ?: throw IllegalArgumentException("Cliente con RUT $rutCliente no existe")
 
-        // Calcular el total de consumo de todos los medidores
         val kwhTotal = calcularKwhTotalCliente(rutCliente, anio, mes)
-
-        // Calcular detalle según tarifa
         val detalle = tarifaService.calcularDetalle(tipoTarifa, kwhTotal)
 
-        // Crear boleta
         val boleta = Boleta(
             idCliente = cliente.rut,
             anio = anio,
@@ -69,15 +55,47 @@ class BoletaService(
             estado = EstadoBoleta.EMITIDA
         )
 
-        // Guardar en el repositorio
         boletaRepositorio.guardar(boleta)
-
         return boleta
     }
 
     /**
-     * Lista todas las boletas de un cliente.
-     */
-    fun boletasDeCliente(rutCliente: String): List<Boleta> =
-        boletaRepositorio.listaPorCliente(rutCliente)
+     * Calcular kwh total cliente
+     *
+     * @param rutCliente
+     * @param anio
+     * @param mes
+     * @return
+     */// Calcula el consumo total (kWh) de todos los medidores del cliente en un mes especifico
+    fun calcularKwhTotalCliente(
+        rutCliente: String,
+        anio: Int,
+        mes: Int
+    ): Double {
+        val medidoresCliente = medidorRepositorio.obtenerPorRut(rutCliente)
+        if (medidoresCliente.isEmpty()) return 0.0
+
+        var total = 0.0
+        medidoresCliente.forEach { medidor ->
+            val lecturas = lecturaRepositorio.listaPorMedidorMes(
+                idMedidor = medidor.codigo,
+                anio = anio,
+                mes = mes
+            )
+            lecturas.forEach { lectura ->
+                total += lectura.kwhLeidos
+            }
+        }
+        return total
+    }
+
+    /**
+     * Boletas de cliente
+     *
+     * @param rutCliente
+     * @return
+     */// Devuelve todas las boletas asociadas a un cliente
+    fun boletasDeCliente(rutCliente: String): List<Boleta> {
+        return boletaRepositorio.listaPorCliente(rutCliente)
+    }
 }

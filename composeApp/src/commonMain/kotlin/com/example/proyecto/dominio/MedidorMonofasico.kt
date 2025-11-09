@@ -1,9 +1,18 @@
 package com.example.proyecto.dominio
 
-/*
-* Medidor monofasico
-* */
-
+/**
+ * Medidor monofasico
+ *
+ * @property potenciaMaxKw
+ * @constructor
+ *
+ * @param id
+ * @param createdAt
+ * @param updatedAt
+ * @param codigo
+ * @param direccionSuministro
+ * @param activo
+ */
 class MedidorMonofasico (
     id: String,
     createdAt: String = "",

@@ -1,9 +1,10 @@
 package com.example.proyecto.dominio
 
-/*
-* Tarifa residencial
-* */
-
+/**
+ * Tarifa residencial
+ *
+ * @constructor Create empty Tarifa residencial
+ */
 class TarifaResidencial : Tarifa {
 
     override fun nombre(): String = "Tarifa Residencial"

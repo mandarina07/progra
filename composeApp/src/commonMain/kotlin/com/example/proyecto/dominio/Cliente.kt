@@ -1,9 +1,19 @@
 package com.example.proyecto.dominio
 
-/*
-*Cliente CGE
-* */
-
+/**
+ * Cliente
+ *
+ * @property direccionFacturacion
+ * @property estado
+ * @constructor
+ *
+ * @param id
+ * @param createdAt
+ * @param updatedAt
+ * @param rut
+ * @param nombre
+ * @param email
+ */
 class Cliente(
     id: String,
     createdAt: String = "",
@@ -14,5 +24,4 @@ class Cliente(
     var direccionFacturacion: String,
     var estado: EstadoCliente = EstadoCliente.ACTIVO
 
-) : Persona(id, createdAt, updatedAt, rut, nombre, email) {
-}
+) : Persona(id, createdAt, updatedAt, rut, nombre, email)

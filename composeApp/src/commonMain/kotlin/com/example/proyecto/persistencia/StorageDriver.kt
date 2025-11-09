@@ -1,29 +1,16 @@
 package com.example.proyecto.persistencia
 
-/*
-*  Abstraccion de un almacenamiento clave/valor
-* USAMOS ESTO O NO? VER LUEGO
-* */
-
+/**
+ * Interfaz genérica de almacenamiento local.
+ * Define las operaciones básicas de guardar, leer y eliminar datos.
+ */
 interface StorageDriver {
-    /**
-     * Guarda datos binarios bajo una clave.
-     */
-    fun save(key: String, data: ByteArray): Boolean
 
-    /**
-     * Lee los datos asociados a una clave.
-     */
-    fun read(key: String): ByteArray?
+    fun put(key: String, data: ByteArray): Boolean
 
-    /**
-     * Lista todas las claves que comienzan con el prefijo dado.
-     */
-    fun keys(prefix: String = ""): List<String>
+    fun get(key: String): ByteArray?
 
-    /**
-     * Elimina la clave indicada.
-     */
-    fun delete(key: String): Boolean
+    fun keys(prefix: String): List<String>
 
+    fun remove(key: String): Boolean
 }
